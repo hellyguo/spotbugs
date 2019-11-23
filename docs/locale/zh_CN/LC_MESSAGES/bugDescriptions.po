@@ -138,7 +138,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:74
 msgid "FI: Finalizer only nulls fields (FI_FINALIZER_ONLY_NULLS_FIELDS)"
 msgstr ""
-"FI: Finalizer 仅使字段为空"
+"FI: 终止方法仅使字段为空"
 "(FI_FINALIZER_ONLY_NULLS_FIELDS)"
 
 #: ../../generated/bugDescriptionList.inc:76
@@ -149,7 +149,7 @@ msgid ""
 "again. You should just remove the finalize\n"
 "method.</p>"
 msgstr ""
-"<p>这个 finalizer 除了置空字段外没有做其他事情。"
+"<p>这个<code>finalize()</code>除了置空字段外没有做其他事情。"
 "这是完全没有意义的，并且需要 GC-清理-再 GC 过程。"
 "可以直接删除该方法。</p>"
 
@@ -160,7 +160,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:90
 msgid "FI: Finalizer nulls fields (FI_FINALIZER_NULLS_FIELDS)"
 msgstr ""
-"FI: Finalizer 使字段为空"
+"FI: 终止方法使字段为空"
 "(FI_FINALIZER_NULLS_FIELDS)"
 
 #: ../../generated/bugDescriptionList.inc:92
@@ -168,7 +168,7 @@ msgid ""
 "<p> This finalizer nulls out fields.  This is usually an error, as it "
 "does not aid garbage collection,\n"
 "and the object is going to be garbage collected anyway.</p>"
-msgstr "<p>这个 finalizer 置空了字段。这一般是一个错误，因为它并没有帮助到 GC 过程，没有它，对象也会被回收。</p>"
+msgstr "<p>这个<code>finalize()</code>置空了字段。这一般是一个错误，因为它并没有帮助到 GC 过程，没有它，对象也会被回收。</p>"
 
 #: ../../generated/bugDescriptionList.inc:100
 msgid "<a id='UI_INHERITANCE_UNSAFE_GETRESOURCE'></a>"
@@ -507,7 +507,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:362
 msgid "FI: Empty finalizer should be deleted (FI_EMPTY)"
 msgstr ""
-"FI: 空的 finalizer 方法应删除"
+"FI: 空的 finalize() 应删除"
 "(FI_EMPTY)"
 
 #: ../../generated/bugDescriptionList.inc:364
@@ -515,7 +515,7 @@ msgid ""
 "<p> Empty <code>finalize()</code> methods are useless, so they should\n"
 "be deleted.</p>"
 msgstr ""
-"<p>空的<code>finalize()</code>没有用，直接删除即可。</p>"
+"<p>空的<code>finalize()</code>没有意义，直接删除即可。</p>"
 
 #: ../../generated/bugDescriptionList.inc:372
 msgid "<a id='FI_NULLIFY_SUPER'></a>"
@@ -524,7 +524,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:377
 msgid "FI: Finalizer nullifies superclass finalizer (FI_NULLIFY_SUPER)"
 msgstr ""
-"FI: Finalizer 使父类的 finalizer 无效了"
+"FI: 终止方法使父类的 finalize() 无效了"
 "(FI_NULLIFY_SUPER)"
 
 #: ../../generated/bugDescriptionList.inc:379
@@ -534,8 +534,8 @@ msgid ""
 "actions defined for the superclass will not be performed.&nbsp;\n"
 "Unless this is intended, delete this method.</p>"
 msgstr ""
-"<p>这种空的<code>finalize()</code>方法显式抵消了其父类定义的任何终结器的效果。"
-"将不会执行父类定义的任何终结器操作。"
+"<p>这种空的<code>finalize()</code>方法显式抵消了其父类定义的任何终止方法的效果。"
+"将不会执行父类定义的任何终止操作。"
 "除非有此意图，否则请删除此方法。</p>"
 
 #: ../../generated/bugDescriptionList.inc:389
@@ -545,7 +545,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:394
 msgid "FI: Finalizer does nothing but call superclass finalizer (FI_USELESS)"
 msgstr ""
-"FI: Finalizer 只调用了父类的 finalizer "
+"FI: 终止方法只调用了父类的 finalize() "
 "(FI_USELESS)"
 
 #: ../../generated/bugDescriptionList.inc:396
@@ -563,7 +563,7 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:410
 msgid "FI: Finalizer does not call superclass finalizer (FI_MISSING_SUPER_CALL)"
 msgstr ""
-"FI: Finalizer 没有调用父类的 finalizer"
+"FI: 终止方法没有调用父类的 finalize()"
 "(FI_MISSING_SUPER_CALL)"
 
 #: ../../generated/bugDescriptionList.inc:412
@@ -573,10 +573,9 @@ msgid ""
 "actions defined for the superclass will not be performed.&nbsp;\n"
 "Add a call to <code>super.finalize()</code>.</p>"
 msgstr ""
-"<p> This <code>finalize()</code> method does not make a call to its\n"
-"superclass's <code>finalize()</code> method.&nbsp; So, any finalizer\n"
-"actions defined for the superclass will not be performed.&nbsp;\n"
-"Add a call to <code>super.finalize()</code>.</p>"
+"<p><code>finalize()</code>方法没有调用父类的<code>finalize()</code>。"
+"所以父类内部定义的终止动作都不会被执行。"
+"添加调用<code>super.finalize()</code>以解决此问题。</p>"
 
 #: ../../generated/bugDescriptionList.inc:422
 msgid "<a id='FI_EXPLICIT_INVOCATION'></a>"
@@ -585,6 +584,8 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:427
 msgid "FI: Explicit invocation of finalizer (FI_EXPLICIT_INVOCATION)"
 msgstr ""
+"FI: 显式调用 finalize()"
+"(FI_EXPLICIT_INVOCATION)"
 
 #: ../../generated/bugDescriptionList.inc:429
 msgid ""
@@ -602,6 +603,10 @@ msgid ""
 "on objects referenced by X, because they may already be getting finalized"
 " in a separate thread.</p>"
 msgstr ""
+"<p>该方法中显式调用了某个对象的<code>finalize()</code>方法。"
+"因为终止方法被设计为只执行一次且只能被 VM 调起，以这种方式使用不是一个好主意。</p>\n"
+"<p>如果一些有联系的对象将被终止，VM 会在所有可终止对象上调用<code>finalize()</code>，这有可能同时在不同线程中发生。"
+"因此，这实在是一个糟糕的主意：在类 X 的<code>finalize()</code>调用被 X 引用对象的<code>finalize</code>(因为他们有可能已经被其他线程终止了。)</p>"
 
 #: ../../generated/bugDescriptionList.inc:442
 msgid "<a id='EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS'></a>"
@@ -612,6 +617,8 @@ msgid ""
 "Eq: Equals checks for incompatible operand "
 "(EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS)"
 msgstr ""
+"Eq: equals() 检查了不兼容的数据"
+"(EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS)"
 
 #: ../../generated/bugDescriptionList.inc:449
 msgid ""
@@ -638,6 +645,19 @@ msgid ""
 "behaviors are possible.\n"
 "</p>"
 msgstr ""
+"<p>该<code>equals</code>尝试检查入参是不是不兼容类型"
+"(如，检查既不是父类又不是子类的其他类)."
+"举个例子，Foo 的 <code>equals()</code>如下：</p>\n"
+"<pre><code>public boolean equals(Object o) {\n"
+"    if (o instanceof Foo)\n"
+"        return name.equals(((Foo)o).name);\n"
+"    else if (o instanceof String)\n"
+"        return name.equals(o);\n"
+"    else return false;\n"
+"}\n"
+"</code></pre>\n"
+"<p>这被认为是不好的做法，因为它很难实现对称且可传递的<code>equals()</code>。"
+"没有这些属性，可能会发生非常意外的行为。</p>"
 
 #: ../../generated/bugDescriptionList.inc:472
 msgid "<a id='EQ_GETCLASS_AND_CLASS_CONSTANT'></a>"
@@ -646,6 +666,8 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:477
 msgid "Eq: equals method fails for subtypes (EQ_GETCLASS_AND_CLASS_CONSTANT)"
 msgstr ""
+"Eq: 子类执行 equals 将失败"
+"(EQ_GETCLASS_AND_CLASS_CONSTANT)"
 
 #: ../../generated/bugDescriptionList.inc:479
 msgid ""
@@ -657,6 +679,10 @@ msgid ""
 "It is better to check if <code>this.getClass() == o.getClass()</code>.\n"
 "</p>"
 msgstr ""
+"<p>如果该类被子类继承，则该类的<code>equals</code>方法将有漏洞。"
+"它将类名直接与参数的类进行比较。"
+"(如，在类<code>Foo</code>中检查<code>Foo.class == o.getClass()</code>)。"
+"更好的检查方式是：<code>this.getClass() == o.getClass()</code>。</p>"
 
 #: ../../generated/bugDescriptionList.inc:490
 msgid "<a id='EQ_SELF_NO_OBJECT'></a>"
