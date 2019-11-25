@@ -691,6 +691,8 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:495
 msgid "Eq: Covariant equals() method defined (EQ_SELF_NO_OBJECT)"
 msgstr ""
+"Eq: 定义了变形的 equals()"
+"(EQ_SELF_NO_OBJECT)"
 
 #: ../../generated/bugDescriptionList.inc:497
 #: ../../generated/bugDescriptionList.inc:762
@@ -701,6 +703,9 @@ msgid ""
 "<code>java.lang.Object</code>, the parameter of <code>equals()</code>\n"
 "must have type <code>java.lang.Object</code>.</p>"
 msgstr ""
+"<p>该类定义了一个变形的<code>equals()</code>。"
+"若要正确覆盖<code>java.lang.Object</code>中的<code>equals()</code>，"
+"该<code>equals()</code>的参数类型必须是<code>java.lang.Object</code>。</p>"
 
 #: ../../generated/bugDescriptionList.inc:507
 msgid "<a id='CO_SELF_NO_OBJECT'></a>"
@@ -709,6 +714,8 @@ msgstr ""
 #: ../../generated/bugDescriptionList.inc:512
 msgid "Co: Covariant compareTo() method defined (CO_SELF_NO_OBJECT)"
 msgstr ""
+"Co: 定义了变形的compareTo()"
+"(CO_SELF_NO_OBJECT)"
 
 #: ../../generated/bugDescriptionList.inc:514
 #: ../../generated/bugDescriptionList.inc:779
@@ -720,6 +727,9 @@ msgid ""
 "<code>compareTo()</code>\n"
 "must have type <code>java.lang.Object</code>.</p>"
 msgstr ""
+"<p>该类定义了一个变形的<code>compareTo()</code>。"
+"若要正确实现<code>Comparable</code>接口中的<code>compareTo()</code>，"
+"该<code>compareTo()</code>的参数类型必须是<code>java.lang.Object</code>。</p>"
 
 #: ../../generated/bugDescriptionList.inc:524
 msgid "<a id='CO_COMPARETO_RESULTS_MIN_VALUE'></a>"
@@ -730,6 +740,8 @@ msgid ""
 "Co: compareTo()/compare() returns Integer.MIN_VALUE "
 "(CO_COMPARETO_RESULTS_MIN_VALUE)"
 msgstr ""
+"Co: compareTo()/compare()返回Integer.MIN_VALUE "
+"(CO_COMPARETO_RESULTS_MIN_VALUE)"
 
 #: ../../generated/bugDescriptionList.inc:531
 msgid ""
@@ -743,6 +755,11 @@ msgid ""
 "value returned is Integer.MIN_VALUE.\n"
 "    So just return -1 rather than Integer.MIN_VALUE."
 msgstr ""
+"<p>在某些情况下，该<code>compareTo()</code>或<code>compare()</code>返回常量<code>Integer.MIN_VALUE</code>，这是一个非常不好的做法。"
+"与<code>compareTo()</code>返回值有关的唯一问题是结果的符号。"
+"但是有时候人们需要将返回值做正负转换，期望结果正确。"
+"确实可以达到目的，但若返回值是<code>Integer.MIN_VALUE</code>则不正确。"
+"实际上，这种情况下返回-1比返回<code>Integer.MIN_VALUE</code>好多了。"
 
 #: ../../generated/bugDescriptionList.inc:543
 msgid "<a id='CO_COMPARETO_INCORRECT_FLOATING'></a>"
@@ -753,6 +770,8 @@ msgid ""
 "Co: compareTo()/compare() incorrectly handles float or double value "
 "(CO_COMPARETO_INCORRECT_FLOATING)"
 msgstr ""
+"Co: compareTo()/compare()没有正确处理单精度浮点数或双精度浮点数"
+"(CO_COMPARETO_INCORRECT_FLOATING)"
 
 #: ../../generated/bugDescriptionList.inc:550
 msgid ""
@@ -764,6 +783,9 @@ msgid ""
 "Float.compare static methods which handle all\n"
 "the special cases correctly.</p>"
 msgstr ""
+"<p>这个方法比较单精度浮点数或双精度浮点数采用了如下模式：<code>val1 > val2 ? 1 : val1 < val2 ? -1 : 0</code>。"
+"这个模式对-0.0和NaN会导致不正确的排序或有错误的集合(假设用来比较的值是作为键使用的)。"
+"考虑使用<code>Double.compare()</code>或<code>Float.compare()</code>静态方法正确地处理所有的特殊情况。</p>"
 
 #: ../../generated/bugDescriptionList.inc:560
 msgid "<a id='RV_NEGATING_RESULT_OF_COMPARETO'></a>"
@@ -774,6 +796,8 @@ msgid ""
 "RV: Negating the result of compareTo()/compare() "
 "(RV_NEGATING_RESULT_OF_COMPARETO)"
 msgstr ""
+"RV: Negating the result of compareTo()/compare()"
+"(RV_NEGATING_RESULT_OF_COMPARETO)"
 
 #: ../../generated/bugDescriptionList.inc:567
 msgid ""
@@ -786,6 +810,9 @@ msgid ""
 "results.\n"
 "</p>"
 msgstr ""
+"<p>这片代码转换了<code>compareTo()</code>或<code>compare()</code>方法返回值的正负值。"
+"这是一个有问题或不好的编程习惯，因为如果返回值是<code>Integer.MIN_VALUE</code>，转换正负值操作无法转换结果的正负值。"
+"您可以通过反转操作数的顺序而不是转换正负值来获得相同的预期结果。</p>"
 
 #: ../../generated/bugDescriptionList.inc:579
 msgid "<a id='ES_COMPARING_STRINGS_WITH_EQ'></a>"
